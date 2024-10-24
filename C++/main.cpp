@@ -65,8 +65,8 @@ cv::Mat quantification(cv::Mat image, char *nomImage) {
   for (int y = 0; y < image.rows; y++) {
     for (int x = 0; x < image.cols; x++) {
       uchar &pixel =
-          image.at<uchar>(y, x);   // Accéder aux valeurs de chaque pixel
-      pixel = (pixel / 128) * 128; // Quantification
+          image.at<uchar>(y, x); // Accéder aux valeurs de chaque pixel
+      pixel = (pixel / 64) * 64; // Quantification
     }
   }
 
@@ -95,13 +95,13 @@ int main(int argc, char **argv) {
   }
 
   // Binarisation
-  cv::Mat imageBinaire = binarisation(image, argv[1]);
+  cv::Mat imageBinaire = binarisation(image.clone(), argv[1]);
 
   // Negatif
-  cv::Mat imageNegatif = negatif(image, argv[1]);
+  cv::Mat imageNegatif = negatif(image.clone(), argv[1]);
 
   // Quantification
-  cv::Mat imageQuantification = quantification(image, argv[1]);
+  cv::Mat imageQuantification = quantification(image.clone(), argv[1]);
 
   return 0;
 }
